@@ -81,6 +81,13 @@ apt-get update && apt-get -y upgrade
 curl https://releases.rancher.com/install-docker/20.10.sh | sh
 ```
 
+### Desabilitar o Firewall
+
+```
+sudo ufw disable
+```
+
+
 ### Instalar o Rancher no Master
 
 ```
