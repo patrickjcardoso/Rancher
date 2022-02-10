@@ -60,7 +60,20 @@ __RAM:__ 8 GB
 __HD:__ 20 GB
 
 
-* Docker compativel com o Rancher
+* Laboratório:
+
+|Função|IP|OS|RAM|CPU|
+|----|----|----|----|----|
+|Master|10.0.0.112|Ubuntu 20.04|16G|2|
+|Worker1|10.0.0.56|Ubuntu 20.04|16G|2|
+|Worker2|10.0.0.117|Ubuntu 20.04|16G|2|
+|Worker3|10.0.0.8|Ubuntu 20.04|16G|2|
+
+```
+apt-get update && apt-get -y upgrade
+```
+
+### Docker compativel com o Rancher
 
 [Fonte: ](https://rancher.com/docs/rancher/v2.5/en/installation/requirements/installing-docker/)
 
@@ -68,31 +81,12 @@ __HD:__ 20 GB
 curl https://releases.rancher.com/install-docker/20.10.sh | sh
 ```
 
-
-
-* Laboratório:
-
-|Função|IP|OS|RAM|CPU|
-|----|----|----|----|----|
-|Master|192.168.1.100|Ubuntu 20.04|16G|2|
-|Worker1|192.168.1.101|Ubuntu 20.04|16G|2|
-|Worker2|192.168.1.102|Ubuntu 20.04|16G|2|
-|Worker3|192.168.1.103|Ubuntu 20.04|16G|2|
-
-
-
-
 ### Instalar o Rancher no Master
-
-
 
 ```
 sudo docker run --privileged -d --restart=unless-stopped -p 80:80 -p 443:443 rancher/rancher:v2.5.11
 
 ```
-
-
-
 * Aguarde o processo finalizar: 2 ~ 5 minutos.
 
 ### Acessando o Rancher
@@ -104,8 +98,6 @@ http://<IP_DO_SERVIDOR>:8080 ou http://<IP_DO_SERVIDOR>
 
 Fazer a configuração de senha e avançar.
 
-
-
 ### Criando um cluster e adicionando os Workers
 
 1. Em Global, selecione a opção *add cluster* e faça a configuração do seu cluster.
@@ -114,16 +106,9 @@ Fazer a configuração de senha e avançar.
 
 3. Acessar os Workers e executar o comando.
 
-
-
-
-
-
 ### Instalar o kubectl e acessar o cluster
 
-
 [Site Oficial](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/)
-
 
 ```
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
@@ -144,6 +129,7 @@ nano ~/.kube/config
 
 
 
+
 ### Troubleshooting
 
 Caso você esteja com algum problema para acessar os nós ou durante o processo de inserção de um no no cluster, você pode limpar seu Iptables. Essa prática só é recomendada para laboratórios, em ambientes reias você deve se aprofundar no iptables.
@@ -156,4 +142,10 @@ iptabels -X
 systemctl restart docker
 # Refazer o processo
 ```
+
+```
+rm -rf /etc/kuberntes/ssl/
+```
+
+
 
